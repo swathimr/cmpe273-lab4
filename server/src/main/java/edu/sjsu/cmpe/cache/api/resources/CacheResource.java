@@ -3,6 +3,7 @@ package edu.sjsu.cmpe.cache.api.resources;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -59,4 +60,13 @@ public class CacheResource {
 
         return Response.status(200).build();
     }
+    
+    @DELETE
+    @Path("{key}")
+    @Timed(name = "delete-entry")
+    public Response delete(@PathParam("key") LongParam key) {
+        cache.delete(key.get());
+        return Response.status(200).build();
+    }
+    
 }
